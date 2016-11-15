@@ -1,0 +1,22 @@
+<div id="page-wrapper">
+  <div class="page-content">
+    <section>
+      <div id="tab-general">
+        <div id="sum_box" class="row mbl">
+          <div class="col-sm-12 col-md-8 col-md-offset-2">
+            <div class="panel income db mbm">
+              <%= form_for @deck, url: {action: "create_new_deck"} do |f| %>
+                <%= f.label :title %>
+                <%= f.text_field :title %>
+                <%= f.collection_select(:category, Category.all, :id, :category, allow_nil: true) %>
+                <%= f.collection_select(:subcategory, Subcategory.all, :id, :subcategory, allow_nil: true) %>
+                <%= f.submit "Submit" %>
+              <% end %>
+              </div>
+            </div>  
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

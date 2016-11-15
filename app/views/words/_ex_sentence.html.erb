@@ -1,0 +1,30 @@
+<div class="options_form">
+  <div class="popover-form">
+    <!-- I am going to take a pause here because I am losing track of my thinking -->
+    <%= form_for @example_sentence, url: create_example_sentences_path(@word) do |f| %>
+    <%= f.label :sentence %>
+    <%= f.text_field :sentence %>
+    <%= f.label :hiragana %>
+    <%= f.text_field :hiragana %>
+    <%= f.label :romaji %>
+    <%= f.text_field :romaji %>
+ 
+  
+  <div id="example_translation_fields" class="popover-form">
+    <%= f.fields_for :example_translations do |example_translation| %>
+      <%= render 'example_translation_fields', f: example_translation %>
+    <% end %>
+    <span class="links">
+      <%= link_to_add_association 'Add Example Translation', f, :example_translations %>
+    </span>
+  </div>
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <div class="actions word-submit">
+        <%= f.submit "Create", class: "btn btn-success btn-round" %>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

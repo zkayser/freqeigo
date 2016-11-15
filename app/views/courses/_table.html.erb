@@ -1,0 +1,16 @@
+<div class="table-responsive">  
+  <table id="word-table" class="table table-bordered table-striped">
+    <thead class="thead-inverse">
+      <tr>
+        <% presenter = WordPresenter.new(nil, self) %>
+        <%= presenter.japanese_list_header %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @words.each_with_index do |word, i| %>
+        <%  p = WordPresenter.new(word, self) %>
+        <%= p.table_row_for_word(word, i) %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

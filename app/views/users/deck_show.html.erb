@@ -1,0 +1,38 @@
+<div id="show-wrapper">
+
+<%= render 'layouts/sidebar' %>
+
+<div id="page-wrapper">
+  <div class="page-content">
+      <div id="tab-general">
+        <div id="sum_box" class="row mbl">
+            <div class="col-sm-12 col-md-8 col-md-offset-2">
+              <div class="panel income db mbm">
+                <div class="card-body panel-body">
+                <div class="inlay success-inlay">
+                  <div class="inlay-content">
+                    <i class="fa fa-check"></i>
+                  </div>
+                </div>
+                <div class="inlay fail-inlay">
+                  <div class="inlay-content">
+                    <i class="fa fa-bolt"></i>
+                  </div>
+                </div>
+                  <div class="card-wrapper">
+                    <%= render 'card' %>
+                  </div>             
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="stats">
+          <%= render 'layouts/stats' %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+

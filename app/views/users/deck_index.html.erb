@@ -1,0 +1,25 @@
+<div id="wrapper">
+
+<%= render 'layouts/sidebar' %>
+<% content_for :deck_link do %>
+  <%= link_to @decks.first.title, user_deck_path(@decks.first, current_user)  %>
+<% end %>
+
+<div id="page-wrapper">
+  <div class="page-content">
+    <section>
+      <div id="tab-general">
+        <div id="sum_box" class="row mbl">
+          <div class="col-sm-12 col-md-8 col-md-offset-2">
+            <div class="panel income db mbm">
+              <%= render 'decks_overview' %>
+              <%= link_to "Add New Deck", new_user_deck_path(current_user) %>
+              </div>
+            </div>  
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+</div>

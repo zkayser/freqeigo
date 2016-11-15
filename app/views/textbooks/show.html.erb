@@ -1,0 +1,10 @@
+<h1><%= @textbook.title %></h1>
+<ul>
+  <%= @textbook.table_of_contents.html_safe %>
+</ul>
+
+<h2><%= @textbook.lessons.first.title %></h2>
+<div style="border: 1px solid black">
+  <%= @textbook.lessons.first.objectives.first.content.html_safe %>
+</div>
+

@@ -1,0 +1,12 @@
+<% if current_user.decks.any? %>
+  <%= paginate @decks %>
+  <div class="table-responsive">
+    <table id="decks-table" class="table table-bordered table-striped">
+    <% presenter = UserDecksPresenter.new(nil, self) %>
+    <%= presenter.table_header %>
+    <%= render 'deck_table' %>
+    </table>
+    <%= paginate @decks %>
+    <% else %>
+    <p>You have not yet created any decks.</p>
+    <% end %>

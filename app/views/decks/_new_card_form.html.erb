@@ -1,0 +1,39 @@
+<%= tinymce %>
+<div class="container textbook-container">
+<section>
+<%= form_for(@card) do |f| %>
+  <% if @card.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@card.errors.count, "error") %> prohibited this card from being saved:</h2>
+
+      <ul>
+      <% @card.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="row">
+    <div class="col col-ms-10 col-md-offset-1 col-xs-12">
+      <div class="centered form-container textbook-form">
+        <h4><%= "Card for #{@deck.title}" %></h4>
+        <%= f.label "Question Type" %>
+        <%= f.text_field :question_type %>
+        <%= f.label :top %>
+        <%= f.text_area :top, class: 'tinymce' %>
+        <%= f.label :bottom %>
+        <%= f.text_area :bottom, class: 'tinymce' %>
+        <%= f.hidden_field :deck, value: @deck.id %>
+    <%= f.submit "Submit and Add New Card" %>
+    <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col col-md-6 col-md-offset-3">
+      <%= link_to "Review Deck", user_deck_path(current_user, @deck) %>
+    </div>
+  </div>
+  </section>
+</div>

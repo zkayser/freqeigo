@@ -1,0 +1,18 @@
+  <div class="container no-side" id="courses">
+    <div id="tab-general">
+      <div id="sum-box" class="row mbl">
+        <% presenter = CoursePresenter.new(nil, self) %>
+        <% if Course.beginner.any? %>
+        <%= presenter.course_list("Beginner") %>
+        <% end %>
+        <% if Course.medium.any? %>
+        <%= presenter.course_list("Medium") %>
+        <% end %>
+        <% if Course.advanced.any? %>
+        <%= presenter.course_list("Advanced") %>
+        <% end %>
+        <% if current_user && current_user.admin? %>
+          <div class="course_links">
+            <%= link_to "Create course", new_course_path %>
+          </div>
+  <% end %>

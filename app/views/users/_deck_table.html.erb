@@ -1,0 +1,50 @@
+<tbody>
+<% @decks.each_with_index do |deck, i| %>
+<script>
+  $(document).on('ready page:load', function() {
+    var options = {
+      trigger: 'click',
+      container: 'body',
+      html: true,
+      placement: 'top'
+    };
+    $('[rel="popover"]').popover(options);
+  })
+</script>
+
+  <tr>
+    <td tabindex="0" rel="popover" role="button" class="deck-popover_<%= i %> pointer-cursor mobile-popover" 
+        data-content="Options: <hr/> <%= "#{link_to( "Study " + deck.title, user_deck_path(current_user, deck))}" %><hr/>
+        <%= "#{link_to("Study " + deck.title + " in sandbox mode", user_deck_path(current_user, deck, sandbox_review: "true"))}" %><hr/>
+        <a href=<%= edit_deck_path(deck) %>>Edit <%= deck.title %></a><hr/>
+        <a data-confirm='You sure?' data-method='delete' href=<%= deck_path(deck) %>>Delete <%= deck.title %></a>
+        ">
+        <%= deck.title %>
+    </td>
+    <td><%= deck.cards.length > 0 ? deck.current_due.length : "0" %></td>
+    <td><%= deck.cards.length > 0 ? deck.cards.length : "0" %></td>
+    <% unless deck.current_due.length == deck.due_today %>
+      <td><%= deck.due_today > 0 ? deck.due_today : "0"  %></td>
+    <% else %>
+      <% if deck.current_due.any? %>
+        <td><%= deck.current_due.length %></td>
+      <% else %>
+        <td>0</td>
+      <% end %>
+    <% end %>
+    <% if deck.cards.future_due.any? %>
+      <td><%= distance_of_time_in_words(deck.next_due, Time.now).titleize %></td>
+    <% else %>
+      <td><%= "" %></td>
+    <% end %>
+    <td><%= deck.set_mastery_level %></td>
+    <td><%= "#{deck.overall_correct_percent.to_s}%" %></td>
+  </tr>
+  <% end %>
+  <tr><td><strong>Total Due Now:</strong> <%= total_due_for_group(@decks) %></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td><strong>Total Due Today:</strong> <%= total_due_today_for_group(@decks) %></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td><strong>Total Cards:</strong> <%= total_number_of_cards_in(@decks) %></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+</tbody>
+
+
+  

@@ -1,0 +1,38 @@
+<div id="wrapper">
+  <%= render 'layouts/sidebar' %>
+  <div id="page-wrapper">
+    <div class="page-content">
+      <% @decks = current_user.decks %>
+      <h1><%= current_user.name %>'s Dashboard</h1>
+      <p><%= @params if @params %></p>
+      <div class="user-information">
+        <div id="sum_box" class="row mbl stats-container">
+          <% presenter = PanelPresenter.new(nil, self) %>
+            <% if current_user.plan %>
+              <% plan = current_user.plan.titleize %>
+            <% else %>
+              <% plan = "BASIC" %>
+            <% end %>
+            <% courses = current_user.courses.length %>
+            <% if current_user.word_lists %>
+            <% word_lists = current_user.word_lists.length %>
+            <% num_words = 0 %>
+            <% current_user.word_lists.each do |list| %>
+            <% num_words += list.words.length %>
+            <% end %>
+            <% else %>
+            <% word_lists = "0" %>
+            <% num_words = "0" %>
+            <% end %>
+            <%= presenter.panel_body(icon: "fa fa-archive", value: "Current Plan:", description: plan).html_safe %>
+            <%= presenter.panel_body(icon: "fa fa-star", value: "Courses Enrolled", description: courses).html_safe %>
+            <%= presenter.panel_body(icon: "fa fa-database", value: "Word Lists", description: word_lists).html_safe %>
+            <%= presenter.panel_body(icon: "fa fa-rocket", value: "Total Vocab Studied", description: num_words).html_safe %>
+        </div>
+        <%= presenter.big_panel(title: "Courses", title_subtext: "You are enrolled in:", right_title: "Progress").html_safe %>
+        <br/>
+        <br/>
+      </div>
+    </div>
+  </div>
+</div>

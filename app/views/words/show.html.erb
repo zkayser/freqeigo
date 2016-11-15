@@ -1,0 +1,93 @@
+<div id="wrapper">
+
+<%= render 'layouts/sidebar' %>
+
+
+<div id="page-wrapper">
+  <div class="page-content">
+    <script type="text/javascript">
+    var checkHiddenLinks;
+    checkHiddenLinks = function(n) {
+      return $(".hidden-word-div p:nth-child(" + n + ")");
+    }
+    
+    <% @word.example_sentences.each do |ex| %>
+      <% if ex.has_multiple_links? %>
+        <% ex.num_multiple_links.times do |num| %>
+          $(document).on('page:load', function() {
+            return $('[class="popover-<%= num %>"]').popover({
+            content: checkHiddenLinks(<%= num %>)
+            });
+          });
+        <% end %>
+        <% else %>
+          $(document).on('page:load', function() {
+            return $('[class="popover"]').popover({
+              content: checkHiddenLinks("1")
+            });
+          });
+      <% end %>
+    <% end %>
+   // var yeahReturn = function() {
+  //    return $("#yeah").html();
+  //  }
+    
+  //  $(function () {
+  //    $('[data-toggle="popover"]').popover({
+  //      content: yeahReturn()
+  //    })
+  //  })
+    </script>
+    <h1><%= @word.word %></h1>
+    <% if current_user && current_user.admin? %>
+    <%= link_to "Delete #{@word.word}?", @word, method: :delete, data: { confirm: "Are you sure you want to delete #{@word.word}?"} %>
+    <%= link_to "Edit #{@word.word}?", edit_word_path(@word) %>
+    <% end %>
+    <% if current_user && current_user.admin? %>
+    <% presenter = ModalFormPresenter.new(nil, self) %>
+    <%= presenter.modal_popover_button("Add example sentence?") %>
+    <% end %>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Create Example Sentence</h4>
+              </div>
+              <div class="modal-body">
+                <%= render 'ex_sentence' %>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Send message</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+    
+  
+    <section>
+      <div id="tab-general">
+        <div id="sum_box" class="row mbl">
+          <div class="col-sm-12 col-md-8 col-md-offset-2">
+            <div class="panel income db mbm">
+              <div class="col col-md-6 pull-right"><h3 class="centered"><%= @word.word %></h3></div><hr/>
+              <%= @word.hiragana %><hr/>
+              <%= @word.reading %><hr/>
+              <% @word.example_sentences.each do |ex| %>
+                <p id="yeah">Example: <%= ex.sentence %></p><hr/>
+                <p>Hiragana: <%= ex.hiragana %></p><hr/>
+                <p>Romaji: <%= ex.romaji %></p><hr/>
+                <% ex.example_translations.each do |et| %>
+                  <p>English: <%= et.example_translation %></p><hr/>
+                <% end %>
+              <% end %>
+            </div>  
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+</div>

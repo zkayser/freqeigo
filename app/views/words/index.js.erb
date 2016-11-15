@@ -1,0 +1,7 @@
+$(".pagination").remove();
+$("#word-table").remove();
+$("#toggle-row").remove();
+$("#label-row").remove();
+$("#admin-row").remove();
+$("<%= escape_javascript( render 'shuffled') %>").appendTo("#study-list-wrapper");
+$(".word-list").popover();

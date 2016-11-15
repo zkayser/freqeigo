@@ -1,0 +1,15 @@
+  <%= render 'control_panel' %>  
+    <%= paginate @words %>
+  <div class="table-wrapper"><%= render 'table' %>
+  </div>
+  <%= paginate @words %>
+  <%= render 'control_panel' %>
+  <div class="row" id="admin-row">
+    <% if current_user.admin? %>
+      <p class="label">Admin Panel:          
+      <%= link_to 'New Word', new_word_path %></p>
+      <% end %>
+  </div>
+  
+</div>
+  

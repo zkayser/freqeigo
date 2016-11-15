@@ -1,0 +1,10 @@
+<div class="col col-md-4">
+      
+    </div>
+    <div class="col col-md-4">
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%=message_type %>"><%= message %></div>
+    </div>
+    <div class="col col-md-4">
+    </div>
+    <% end %>

@@ -1,0 +1,20 @@
+
+  <h3>LESSONS</h3>
+  <div class="nested-fields">
+
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  
+    <%= link_to_remove_association "Remove Lesson", f %>
+    
+    <div id="objective_fields">
+    <%= f.fields_for :objectives do |objective| %>
+      <%= render 'objective_fields', f: objective %>
+    <% end %>
+    <span class="links">
+      <%= link_to_add_association 'Add Objective', f, :objectives %>
+    </span>
+  </div>
+    
+    
+  </div>

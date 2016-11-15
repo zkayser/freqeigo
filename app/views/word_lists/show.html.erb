@@ -1,0 +1,47 @@
+<h1><%= @word_list.title %></h1>
+
+<div class="study-list-wrapper col-md-8">
+  <table class="table table-inverse">
+    <thead class="thead-inverse">
+      <colgroup span="5">
+        <col class="number-column">
+        <col class="word-column">
+        <col class="hiragana-column">
+        <col class="reading-column">
+        <col class="translation-column">
+      </colgroup>
+      <th class="table-header">#</th>
+      <% presenter = WordListPresenter.new(@word_list, self) %>
+      <%= presenter.word_header %>
+      <%= presenter.hiragana_header %>
+      <%= presenter.reading_header %>
+      <%= presenter.translation_header %>
+    </thead>
+    <tbody style="text-align: center">
+      <%= presenter.table_row_for_word %>
+      <tr>
+        <td></td>
+        <td><button class="btn btn-danger" id="hide-word">Hide</button></td>
+        <td><button class="btn btn-danger" id="hide-hiragana">Hide</button></td>
+        <td><button class="btn btn-danger" id="hide-reading">Hide</button></td>
+        <td><button class="btn btn-danger" id="hide-translation">Hide</button></td>
+      </tr>
+      <tr>
+        <td>
+          <td><button class="btn btn-success" id="show-word">Show</button></td>
+          <td><button class="btn btn-success" id="show-hiragana">Show</button></td>
+          <td><button class="btn btn-success" id="show-reading">Show</button></td>
+          <td><button class="btn btn-success" id="show-translation">Show</button></td>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="list-toggle-buttons">
+  <button class="btn btn-danger" id="hide-all-words">Hide vocab</button>
+  <button class="btn btn-success" id="show-all-words">Show vocab</button>
+</div>
+
+<%= link_to 'Edit', edit_word_list_path(@word_list) %> |
+<%= link_to 'Back', word_lists_path %>

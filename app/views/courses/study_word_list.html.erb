@@ -1,0 +1,11 @@
+<% if notice %>
+<p id="notice"><%= notice %></p>
+<% end %>
+
+<div class="container">
+  <h1><%= @word_list.title.titleize %></h1>
+
+
+  <div id="study-list-wrapper"><%= render 'word_table' %>
+  </div>
+</div>

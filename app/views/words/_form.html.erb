@@ -1,0 +1,81 @@
+<%= tinymce %>
+<div class="container word-container">
+<%= form_for(@word) do |f| %>
+  <% if @word.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@word.errors.count, "error") %> prohibited this word from being saved:</h2>
+
+      <ul>
+      <% @word.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="form-container left-container word-form">
+    <%= f.label :word %>
+    <%= f.text_field :word %>
+    <%= f.label :hiragana %>
+    <%= f.text_field :hiragana %>
+    <%= f.label :reading %>
+    <%= f.text_field :reading %>
+    <%= f.label :part_of_speech %>
+    <%= f.select(:part_of_speech, Word::PARTS_OF_SPEECH) %>
+    <!-- I just took synonym and antonym fields out of the Word model.
+         I have created their own respective models and they will need to be added in as
+         extra fields just like translation fields, etc. -->
+    <%= f.label 'Has passive form?' %>
+    <%= f.check_box :has_passive %><br/>
+    <%= f.label 'Has causative form?' %>
+    <%= f.check_box :has_causative %><br/>
+    <%= f.label 'Has causative passive form?' %>
+    <%= f.check_box :has_causative_passive %><br/>
+    <%= f.label 'Has volitional?' %>
+    <%= f.check_box :has_volitional %><br/>
+    <%= f.label 'Has imperative?' %>
+    <%= f.check_box :has_imperative %><br/>
+    <%= f.label :priority %>
+    <%= f.text_field :priority %>
+    <%= f.label :note %>
+    <%= f.text_area :note, :class => "tinymce" %>
+    <%= f.collection_select(:word_list_id, WordList.all, :id, :title) %>
+  </div>
+
+  
+  <div id="translation_fields" class="form-container right-container word-form">
+    <%= f.fields_for :translations do |translation| %>
+      <%= render 'translation_fields', f: translation %>
+    <% end %>
+    <span class="links">
+      <%= link_to_add_association 'Add Translation', f, :translations %>
+    </span>
+  </div>
+  
+  <div id="syn_fields" class="form-container right-container word-form">
+    <%= f.fields_for :syns do |synonym| %>
+      <%= render 'synonym_fields', f: synonym %>
+    <% end %>
+    <span class="links">
+      <%= link_to_add_association 'Add Synonym', f, :syns %>
+    </span>
+  </div>
+  
+  <div id="ant_fields" class="form-container right-container word-form">
+    <%= f.fields_for :ants do |antonym| %>
+      <%= render 'antonym_fields', f: antonym %>
+    <% end %>
+    <span class="links">
+      <%= link_to_add_association 'Add Antonym', f, :ants %>
+    </span>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <div class="actions word-submit">
+        <%= f.submit class: "btn btn-success btn-round" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

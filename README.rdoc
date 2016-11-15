@@ -1,0 +1,20 @@
+== README
+
+This application started out as a personal experiment to learn and become
+more familiar with Rails. The original intent was to build out an application
+to assist students learning the Japanese language, and thus much of the original
+functionality and models are focused around the language and building a
+framework for disciplined study of the language.
+
+After working on the project for a while, quite a bit of tangentially related
+functionality ended up getting thrown into the overall app, which at present
+can definitely use a major refactor; however, the app includes a functional
+flashcard and deck system that is on its way to becoming a full-fledged 
+application on its own. The Japanese-related classes and modules in app/lib/japanese
+feature some interesting, though verbose, code for working with the Japanese
+language. Tests covering what exactly those modules do can be found in 
+/spec/models/word_spec.rb. 
+
+The /stan_algorithms folder includes a set of algorithms that are completely
+unrelated to the app, but were just exercises to build fluency with the Ruby
+language itself.

@@ -1,0 +1,18 @@
+<h1>New Subscription</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Back', subscriptions_path %>
+
+<%= link_to 'PayPal', @subscription.paypal_url %>
+
+<section>
+<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="Z5DR94G66R4BL">
+<input type="hidden" name="user" value="<%= current_user.id %>">
+<input type="hidden" name="notify_url" value="https://rails-tutorial-zkayser.c9.io/payment_notifications">
+<input id="paypal-image" type="image" src="https://www.sandbox.paypal.com/en_US/JP/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+</section>

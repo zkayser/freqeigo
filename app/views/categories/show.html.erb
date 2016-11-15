@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @category.category %>
+</p>
+
+<table>
+  <thead>
+    <th>Subcategories</th>
+  </thead>
+  <tbody>
+    <% @category.subcategories.each do |sub| %>
+    <tr>
+      <td><%= link_to sub.subcategory, sub %></td>
+    </tr>
+  </tbody>
+  <% end %>
+</table>
+
+<%= link_to 'Add Subcategory', new_category_subcategory_path(@category) %> <br/>
+<%= link_to 'Edit', edit_category_path(@category) %> |
+<%= link_to 'Back', categories_path %>

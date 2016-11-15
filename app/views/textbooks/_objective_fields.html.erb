@@ -1,0 +1,11 @@
+
+  <h3>OBJECTIVES</h3>
+  <div class="nested-fields">
+    <%= tinymce %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <%= f.label :content %>
+    <%= f.text_area :content, :class => "tinymce" %>
+  
+    <%= link_to_remove_association "Remove Objective", f %>
+  </div>

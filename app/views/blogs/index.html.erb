@@ -1,0 +1,52 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+  <div class="col col-md-8 col-xs-12 clearfix">
+    <section class="clearfix">
+    <ul class="posts">
+      <% @blogs.each do |blog| %>
+      <li class="list-unstyled clearfix">
+        <h1 class="blog-title"><%= link_to blog.title, blog_path(blog) %></h1>
+        <ul class="list-inline meta">
+        <li><!-- Author name and date go here --><%= blog.author || "Zack Kayser"%> on <%= blog.created_at.strftime("%B %-d, %Y") if blog.created_at %></li>
+        <li><!-- Link to comments and number of comments --><%= blog.comments.length || "0" %> comments</li>
+        <li><!-- Tags --><% if blog.blog_tags.empty? %>
+          <%= "No tags" %>
+          <% else %>
+          <%= blog.blog_tags.each do |t| %>
+            <%= t.tag + "," %>
+          <% end %>
+          <% end %>
+        </li>
+        </ul>
+        <% if blog.picture? %>
+        <div>
+          <%= link_to image_tag(blog.picture), blog_path(blog), class: "blog-image-link" %>
+        </div>
+        <% end %>
+        <div>
+          <%= blog.content.html_safe %>
+        </div>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+  </section>
+  <div class="col col-md-offset-1 col-md-3 col-xs-hidden blog-sidebar">
+    <section>
+    <h3>About</h3>
+    <p><i class="fa fa-rocket pull-right"></i> Call to action. This is calling you to action. I should probably do something here to encourage people to use the site.</p>
+    <p class="btn btn-sm btn-success">Check now</p>
+    
+    <h3>Archives</h3>
+    <!-- Put in archives by month -->
+    
+    <h3>Subscribe</h3>
+    </section>
+  </div>
+
+</div>
+
+<%= render 'layouts/footer' %>
+
+

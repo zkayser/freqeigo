@@ -1,0 +1,19 @@
+<div id="wrapper">
+  <%= render 'layouts/sidebar' %>
+  <div id="page-wrapper">
+    <div class="page-content">
+      <h1><%= @course.title %></h1>
+      <p><%= link_to "Word List", study_word_list_path(@course, 1) %></p>
+    </div>
+  </div>
+
+
+
+
+
+<% if current_user && current_user.admin? %>
+<div class="course-links">
+  <%= link_to "Edit", edit_course_path(@course) %>
+  <%= link_to 'Destroy', @course, method: :delete, data: { confirm: 'Are you sure?' } %>
+</div>
+<% end %>

@@ -1,0 +1,6 @@
+<h1>Decks#index</h1>
+<table>
+  <% @decks.each do |deck| %>
+  <tr><%= link_to "#{deck.title}", user_deck_path(current_user, deck) %></tr>
+  <% end %>
+</table>

@@ -1,0 +1,39 @@
+<div class="card-container">
+      <% if @first.nil? %>
+      <p><%= "No messages due at this time!" %></p>
+      <% end %>
+      <% unless @first.nil? %>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <h2><%= "Question type: #{@first.question_type}" if @first.question_type%></h2>
+          <h2><%= @first.top.html_safe %></h2>
+        </div>
+      </div>
+      <hr/>
+      <div class="row card-bottom card-bottom-hidden">
+        <div class="col-md-6 col-md-offset-3">
+          <h2><%= @first.bottom.html_safe %></h2>
+        </div>
+      </div>
+      <% end %>
+      
+  <div class="row btn-row">
+      <div class="col col-md-3 col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3" id="forgot">
+        <%= link_to "Again!", unsuccessful_review_path(@deck, @first), remote: true,
+          class: "btn btn-danger btn-round", method: :patch,
+          data: { disable_with: "Working..." } %>
+      </div>
+      <div class="col col-md-3 col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3" id="remembered">
+        <%= link_to "Got it!", successful_review_path(@deck, @first), remote: true, 
+          class: "btn btn-success btn-round", method: :patch, 
+          data: { disable_with: "Working.." } %>
+      </div>
+      <div class="col col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3" id="control-panel">
+        <% if @first %>
+          <button class="btn btn-primary btn-round" id="show">Show Answer</button>
+        <% else %>
+          <button class="btn btn-primary btn-round"><%= link_to "Back to Decks", user_decks_path(current_user) %></button>
+          <% end %>
+      </div>
+  </div>
+</div>

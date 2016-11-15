@@ -1,0 +1,9 @@
+<% if current_user && current_user.admin? %>
+
+<h1>Customers</h1>
+<% @customers.each do |customer| %>
+  <%= customer.inspect %>
+  <hr/>
+<% end %>
+
+<% end %>

@@ -1,0 +1,10 @@
+<div class="options_form">
+<% matches = Cardifiable::CARDIFIABLE_FIELDS %>
+
+<%= form_tag custom_deckify_path(@word_list, current_user), method: :post, class: 'form-inline' do %>
+  <h2>Give your deck a title: </h2>
+  <%= text_field_tag(:title) %>
+  <%= html_output_for_custom_deckify(matches) %>
+  <%= submit_tag("Get your deck") %>
+<% end %>
+</div>

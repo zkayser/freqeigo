@@ -1,0 +1,32 @@
+<%= form_for(@word_list) do |f| %>
+  <% if @word_list.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@word_list.errors.count, "error") %> prohibited this word_list from being saved:</h2>
+
+      <ul>
+      <% @word_list.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.collection_select(:course_id, Course.all, :id, :title) %>
+  
+  <h3>Words</h3>
+    <div id="word_fields">
+      <%= f.fields_for :words do |word| %>
+        <%= render 'word_fields', f: word %>
+      <% end %>
+      <span class="links">
+        <%= link_to_add_association 'Add Word', f, :words %>
+      </span>
+    
+    </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

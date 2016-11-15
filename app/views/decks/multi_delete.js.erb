@@ -1,0 +1,9 @@
+<% unless @delete %>
+alert("Please select cards to be deleted.");
+<% end %>
+
+<% if @delete %>
+<% @delete.each do |card| %>
+$(".card_<%=card.id %>").remove();
+<% end %>
+<% end %>

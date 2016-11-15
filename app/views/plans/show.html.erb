@@ -1,0 +1,21 @@
+<section>
+  <h1><%= @plan.name %></h1>
+  <h2>Price: <%= @plan.amount %></h2>
+  <h3>Type: <%= @plan.interval.titleize %>ly</h3>
+  <div class="row">
+    <div class="col col-md-6 col-md-offset-3">
+  <form id="subscription_sign_up" action="/subscriptions" method="POST">
+    <input type="hidden" name="plan" value="<%= @plan.id %>">
+    <input type="hidden" name="interval" value="<%= @plan.interval %>">
+  <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="<%= ENV['PUBLISHABLE_KEY'] %>"
+    data-name="<%= @plan.name %>"
+    data-description="<%= @plan.interval.titleize %>ly Subscription"
+    data-amount="<%= @plan.amount %>"
+    data-label="Sign Me Up!" >
+  </script>
+</form>
+</div>
+</div>
+</section>

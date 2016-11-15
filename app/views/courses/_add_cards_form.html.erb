@@ -1,0 +1,15 @@
+<div class="options_form">
+
+
+<%= form_tag user_deck_create_path, method: :post, class: 'form-inline' do %>
+  <h2>Give your deck a title: </h2>
+  <%= text_field_tag(:title) %>
+  <% @word_list.words.all.to_a.each_with_index do |word, i| %>
+    <%= label_tag word.word do %>
+      <span><%= word.word %></span>
+      <%= check_box_tag("fact_#{i}", word.word)  %>
+    <% end %><br/>
+  <% end %>
+  <%= submit_tag("Get your deck") %>
+<% end %>
+</div>

@@ -1,0 +1,31 @@
+<div id="wrapper">
+  <%= render 'layouts/sidebar' %>
+</div>
+
+<div id="page-wrapper">
+  <div class="page-content">
+    <section>
+      <div id="tab-general">
+        <div id="sum_box" class="row mbl">
+          <div class="col-sm-12 col-md-8 col-md-offset-2">
+            <div class="panel income db mbm">
+              <div style="margin: 20px; padding: 20px;">
+              <%= form_tag('hiragana_convert/convert', method: "post", remote: true) do %>
+                <%= label_tag(:sentence, "Convert to Roman Letters:") %>
+                <%= text_field_tag(:sentence) %>
+                <br/>
+                <div class="response">
+                  <p class="converted"></p>
+                </div>
+                <%= submit_tag("Convert") %>
+              <% end %>
+              </div>
+              </div>
+            </div>  
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+</div>

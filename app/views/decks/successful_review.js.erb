@@ -1,0 +1,13 @@
+setTimeout(function(){
+  $(".card-container").remove();
+  $(".stats-container").remove();
+  $(".inlay").removeClass("inlay-remembered");
+}, 200);
+setTimeout(function(){
+  $("<%=escape_javascript( render 'card' )%>").appendTo(".card-wrapper");
+  $("<%=escape_javascript( render 'layouts/stats')%>").appendTo(".stats");
+}, 200);
+setTimeout(function(){
+  $("#remembered").hide();
+  $("#forgot").hide();
+}, 200);

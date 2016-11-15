@@ -1,0 +1,36 @@
+<div id="wrapper">
+  <%= render 'layouts/sidebar' %>
+  
+  <div id="page-wrapper">
+    <div class="page-content">
+      <h1>Edit Deck</h1>
+      <div class="table-responsive">
+        <div class="table-wrapper">
+        <%= form_tag deck_multi_delete_path(@deck), remote: true do %>
+          <div class="title">
+            <div class="edit-name">
+              <span>Cards</span>
+            </div>
+            <div class="edit-buttons">
+              <%= link_to "Add Card", new_deck_card_path(@deck), class: 'btn btn-edit btn-sm', style: "width: 75px;"  %>
+              <%= submit_tag "Delete", class: 'btn btn-edit btn-sm', style: "width: 75px;" %>
+              <%= submit_tag "Update", class: 'btn btn-edit btn-sm', style: "width: 75px;" %>
+            </div>
+          </div>
+          <table class="table table-bordered table-striped">
+          <% presenter = EditDeckPresenter.new(nil, self) %>
+          <%= presenter.table_header %>
+          <% @deck.cards.each do |card| %>
+            <tr class="card_<%= card.id %>">
+              <td class="checkbox-cell"><%= check_box_tag("card_ids[]", card.id) %></td>
+              <td><%= link_to card.top.html_safe, edit_deck_card_path(@deck, card) %></td>
+              <td><%= card.bottom.html_safe %></td>
+            </tr>
+          <% end %>
+          </table>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

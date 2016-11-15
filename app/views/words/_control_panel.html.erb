@@ -1,0 +1,17 @@
+  <div class="row" id="label-row">
+      <p class="label">Control panel:</p>
+  </div>
+  <div class="row" id="toggle-row">
+    <div class="col col-md-3" id="control-panel">
+      <%= link_to 'Shuffle', vocab_list_path(params[:page]), remote: true, class: 'btn btn-success shuffle-button', data: { disable_with: "Shuffling..." } %>
+    </div>
+    <div class="col col-md-3" id="control-panel">
+      <button class="btn btn-primary" id="toggle-word-attributes">Kanji only</button>
+    </div>
+    <div class="col col-md-3" id="control-panel">
+      <button class="btn btn-primary" id="toggle-word-list">Japanese</button>
+    </div>
+    <div class="col col-md-3" id="control-panel">
+      <button class="btn btn-primary" id="toggle-translations">English</button>
+    </div>
+  </div>

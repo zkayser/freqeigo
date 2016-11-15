@@ -1,0 +1,69 @@
+<div id="sum_box" class="row mbl stats-container">
+  <div class="col-sm-6 col-md-3">
+    <div class="panel profit db mbm">
+      <div class="panel-body">
+        <p class="icon"><i class="icon fa fa-percent"></i></p>
+        <h4 class="value"><span><%= @deck.overall_correct_percent %></span><span>%</span>
+          <span data-counter="" data-start="10" data-end="50" data-step="1" data-duration="0">
+          </span><span><i class="glyphicon glypichon-text-color"></i></span></h4>
+          <p class="description"><i class="glyphicon glyphicon-text-color"></i>Total Correct: (<%= @deck.total_correct %>/<%= @deck.total_seen %>)</p><br/>
+        <div class="progress progress-sm mbn">
+          <div role="progressbar" aria-valuenow="<%= @deck.overall_correct_percent %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= @deck.overall_correct_percent %>%;" class="progress-bar progress-bar-success"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-3">
+    <div class="panel income db mbm">
+      <div class="panel-body">
+        <p class="icon"><i class="icon fa fa-star-o"></i></p>
+        <h4 class="value"><span><%= @deck.current_correct_percent %>%</span></h4>
+        <p class="description">Current: (<%= @deck.current_correct %>/<%= @deck.current_seen %>)</p><br/>
+          <div class="progress progress-sm mbn">
+            <div role="progressbar" aria-valuenow="<%= @deck.current_correct_percent %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= @deck.current_correct_percent %>%;" class="progress-bar progress-bar-info"><span class="sr-only">60% Complete (success)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <div class="col-sm-6 col-md-3">
+    <div class="panel task db mbm">
+      <div class="panel-body">
+        <p class="icon"><i class="icon fa fa-signal"></i></p>
+        <% unless cookies[:sandbox_review] %>
+        <h4 class="value"><span><% if @due %><%= @due.length %><% else %><%= @deck.current_due.length %><% end %></span></h4>
+        <p class="description"> Cards Remaining: <% if @due %><%= @due.length %><% else %><%= @deck.current_due.length %><% end %></p><br/>
+        <div class="progress progress-sm mbn">
+          <div role="progressbar" aria-valuenow="<%= ((@deck.num_cards_due.to_f / @deck.cards.length.to_f) * 100).round %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= ((@deck.num_cards_due.to_f / @deck.cards.length.to_f) * 100).round %>%;" class="progress-bar progress-bar-danger">
+            <span class="sr-only">50% Complete (success)</span>
+          </div>
+        <% else %>
+        <h4 class="value"><span><% if @due %><%= @due.length %><% else %><%= @deck.cards.length %><% end %></span></h4>
+        <p class="description"> Cards Remaining: <% if @due %><%= @due.length %><% else %><%= @deck.cards.length %><% end %></p><br/>
+        <div class="progress progress-sm mbn">
+          <div role="progressbar" aria-valuenow="<%= ((@deck.current_sandbox_due_length.to_f / @deck.cards.length.to_f) * 100).round %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= ((@deck.current_sandbox_due_length.to_f / @deck.cards.length.to_f) * 100).round %>%;" class="progress-bar progress-bar-danger">
+            <span class="sr-only">50% Complete (success)</span>
+          </div>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-3">
+    <div class="panel visit db mbm">
+      <div class="panel-body">
+      <p class="icon"><i class="icon fa fa-group"></i></p>
+      <%#= This should be moved to a helper module once you know it is working %>
+      <% if @fact || @first %>
+      <% @current_card = @fact || @first %>
+      <h4 class="value"><span><%= current_card_percentage(@current_card) unless @current_card.overall_seen == 0 %></span></h4>
+      <p class="description">Current Card: <%= @current_card.overall_correct %> / <%= @current_card.overall_seen %></p>
+      <p class="description">Level: <%= @current_card.set_mastery_level %></p>
+      <div class="progress progress-sm mbn">
+        <div role="progressbar" aria-valuenow="<%= current_card_percentage(@current_card) %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= current_card_percentage(@current_card) %>;" class="progress-bar progress-bar-warning">
+          <span class="sr-only"><%= current_card_percentage(@current_card) %></span></div>
+       </div>
+       <% end %>
+      </div>
+    </div>
+  </div>
+</div>
